@@ -1,0 +1,44 @@
+:root {
+    --theme-color: #296eee;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+}
+* {
+    transition: all 0.5s ease-in-out;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+.flex.center {
+    align-items: center;
+    justify-content: center;
+}
+.hidden {
+    display: none;
+}
+main {
+    height: calc(100% - 100px);
+}
+select {
+    text-align-last: center;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 45px;
+    background: #f3f3f3;
+}
+
+.navbar-brand img {
+    max-height: 45px;
+    width: auto;
+}
+.footer-text {
+    line-height: 25px;
+}
+.footer-text i {
+    vertical-align: middle;
+}
