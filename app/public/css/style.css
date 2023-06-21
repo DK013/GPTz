@@ -12,6 +12,9 @@ html, body {
     display: flex;
     flex-direction: column;
 }
+.flex.f-row {
+    flex-direction: row;
+}
 .flex.center {
     align-items: center;
     justify-content: center;

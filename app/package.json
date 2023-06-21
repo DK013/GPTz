@@ -1,23 +1,39 @@
 {
-  "name": "gptz-server",
+  "name": "gptz",
   "version": "1.0.0",
   "description": "Server for GPTz zoom bot",
+  "displayName": "GPTz",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "node scripts/dev.js",
     "serve": "ngrok http 8080",
+    "prepare": "node scripts/gen-secrets.cjs",
+    "postinstall": "npm run prepare",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Deep Chakraborty",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
+    "debug": "^4.3.4",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
+    "http-errors": "^2.0.0",
     "jsrsasign": "^10.8.6",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "envsub": "^4.1.0"
   }
 }

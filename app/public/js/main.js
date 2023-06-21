@@ -1,3 +1,10 @@
+async function getAccessToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    var response = await fetch('/api/v1/auth/'+urlParams.get('code'));
+    const data = await response.json();
+    return data;
+}
+
 $('#joinForm').on('submit', async function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -33,12 +40,37 @@ $('#joinForm').on('submit', async function(e) {
     });
     const jsonData = await response.json();
     if(response.ok) {
-        $('#joinForm').addClass('hidden');
         $('#app').removeClass('hidden');
+        $('#joinForm').addClass('hidden');
         $('#token').val(jsonData.signature);
+        getJoinToken(id);
     }
     else {
         $('#joinForm').append('<div class="alert alert-danger mt-3" role="alert">Something went wrong. Check Console for details.</div>')
         console.log(json.error);
     }
 })
+
+const getJoinToken = async (id) => {
+    var accessToken = await getAccessToken();
+    
+    const response = await fetch('/api/v1/token', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({id: id, token: accessToken.access_token})
+    });
+    
+    const jsonData = await response.json();
+
+    if(response.ok) {
+        $('#jointoken').val(jsonData.token);
+    }
+    else {
+        $('#joinForm').append('<div class="alert alert-danger mt-3" role="alert">Something went wrong. Check Console for details.</div>')
+        console.log(json.error);
+    }
+}
+
+var clipboard = new ClipboardJS('.copyBtn');
