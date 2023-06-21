@@ -4,34 +4,33 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title><%= title %></title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-icons.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-icons.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <%- include('navbar.html') -%>
         <main class="w-100 flex center">
-            <% if(locals.jwt) { %>
-                <%- include('form.html') -%>
+            <h1 class="mb-3">Welcome to <%= title %></h1>
+            <% if(locals.isZoom) { %>
                 <%- include('app.html') -%>
             <% } else { %>
-                <h1>Welcome to <%= title %></h1>
-                <div class="flex f-row center mt-3">
-                    <a href="/install" class="btn btn-primary mx-1 px-6">Install App</a>
-                    <a href="/jwt" class="btn btn-primary mx-1 px-6">Authenticate Bot</a>
+                <%- include('form.html') -%>
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="bi bi-info-circle"></i> You're viewing the app from <%= context %>
                 </div>
-                <% if(locals.isZoom == "") { %>
-                    <div class="alert alert-info mt-3" role="alert">
-                        <i class="bi bi-info-circle"></i> You're viewing the app from <%= context %>
-                    </div>
-                <% } %>
             <% } %>
+            <pre id="url"></pre>
         </main>
         <%- include('footer.html') -%>
 
         <script src="js/jquery-3.7.0.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/clipboard.min.js"></script>
+        <script src="https://appssdk.zoom.us/sdk.min.js"></script>
         <script src="js/main.js"></script>
+        <% if(locals.isZoom) { %>
+            <script src="js/zoom.js"></script>
+        <% } %>
     </body>
 </html>

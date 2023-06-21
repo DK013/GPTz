@@ -1,13 +1,23 @@
-<div id="app" class="flex center w-50 hidden">
-    <div class="flex f-row center mb-3">
-        <input type="text" class="form-control w-75 mr-3 text-center" id="token" name="token" placeholder="" readonly>
-        <button type="submit" class="copyBtn btn btn-primary w-25" data-clipboard-target="#token">COPY</button>
+<div id="app" class="flex center w-100 px-1">
+    <div class="input-group mb-3 flex-nowrap w-100">
+        <span class="input-group-text" id="no_label">Meeting Number</span>
+        <input type="text" class="form-control w-100 mr-3 text-center" id="meeting_number" name="meeting_number" placeholder="meeting number" aria-describedby="jwt_label" readonly>
+        <button type="button" class="copyBtn btn btn-outline-secondary" data-clipboard-target="#meeting_number"><i class="bi bi-clipboard"></i></button>
     </div>
-    <div class="flex f-row center mb-3">
-        <input type="text" class="form-control w-75 mr-3 text-center" id="jointoken" name="jointoken" placeholder="" readonly>
-        <button type="submit" class="copyBtn btn btn-primary w-25" data-clipboard-target="#jointoken">COPY</button>
+    <div class="input-group mb-3 flex-nowrap w-100">
+        <span class="input-group-text" id="jwt_label">JWT</span>
+        <input type="text" class="form-control w-100 mr-3 text-center" id="jwt" name="jwt" placeholder="JWT" aria-describedby="jwt_label" readonly>
+        <button type="button" class="copyBtn btn btn-outline-secondary" data-clipboard-target="#jwt"><i class="bi bi-clipboard"></i></button>
     </div>
-    <div class="alert alert-info mt-3" role="alert">
+    <div class="input-group mb-3 flex-nowrap w-100">
+        <span class="input-group-text" id="token_label">Access Token</span>
+        <input type="text" class="form-control w-100 mr-3 text-center" id="token" name="token" placeholder="Access Token" aria-describedby="token_label" readonly>
+        <button type="button" class="copyBtn btn btn-outline-secondary" data-clipboard-target="#token"><i class="bi bi-clipboard"></i></button>
+    </div>
+    <div class="alert alert-info mt-3 w-100" role="alert">
         You're successfully authenticated. Simply copy and paste the JWT and token provided above in your bot to join.
     </div>
-</form>
+</div>
+<div id="auth" class="flex center w-100 px-1 hideen">
+    <button class="loginBtn btn btn-primary">LOGIN TO CONTINUE</button>
+</div>

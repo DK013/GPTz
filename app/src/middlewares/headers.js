@@ -14,10 +14,10 @@ const headers = {
     contentSecurityPolicy: {
         directives: {
             'default-src': 'self',
-            styleSrc: ["'self'"],
+            styleSrc: ["'self'", "*"],
             scriptSrc: ["'self'", 'https://appssdk.zoom.us/sdk.min.js'],
             imgSrc: ["'self'", `https://${redirectHost}`],
-            'connect-src': 'self',
+            'connect-src': ["'self'", `https://${redirectHost}`],
             'base-uri': 'self',
             'form-action': 'self',
         },

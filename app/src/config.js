@@ -9,6 +9,7 @@ const deps = [
     'ZOOM_MEETING_SDK_SECRET',
     'ZOOM_REDIRECT_URL',
     'SESSION_SECRET',
+    'MONGO_URI'
 ];
 
 // Check that we have all our config dependencies
@@ -39,6 +40,7 @@ const zoomApp = {
     oauthSecret: config.ZOOM_OAUTH_SECRET,
     redirectUrl: config.ZOOM_REDIRECT_URL,
     sessionSecret: config.SESSION_SECRET,
+    dbUrl: config.MONGO_URI
 };
 
 // Zoom App Info

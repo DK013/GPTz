@@ -11,8 +11,9 @@ const logger = require('morgan');
 const path = require('path');
 const headers = require('./middlewares/headers');
 const logFunc = require('./helpers/requestHelper');
+const mongoose = require('mongoose');
 
-const { appName, port } = require('./config');
+const { appName, port, zoomApp } = require('./config');
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
@@ -31,10 +32,6 @@ app.use(express.urlencoded({ extended: false }));
 app.set('port', port);
 app.set('trust proxy', true);
 
-app.use(function(req, res, next) {
-    res.setHeader("Content-Security-Policy", "default-src 'self' *; style-src 'self' *; script-src 'self' *");
-    return next();
-});
 app.engine('.html', require('ejs').__express);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../public')));
@@ -67,8 +64,12 @@ app.use((err, req, res, next) => {
 //handle 404
 app.get('*', (req, res) => res.redirect('/'));
 
-app.listen(port, () => {
-    console.log(`listenning on port ${port}`);
-});
+mongoose.connect(zoomApp.dbUrl)
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Connected to DB and listenning on port ${port}`);
+        });
+    })
+    .catch((err) => { console.error(err); });
 
 module.exports = app;

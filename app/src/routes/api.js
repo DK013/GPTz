@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
+const session = require('../session.js');
+
 const { 
-    getAccessToken,
     getMeetingJWT,
-    getMeetingToken,
+    getContext,
 } = require('../controller');
 
-router.get('/auth/:code', getAccessToken);
+router.post('/jwt', session, getMeetingJWT);
 
-router.post('/jwt', getMeetingJWT);
+router.get('/getContext/:id', session, getContext);
 
-router.post('/token', getMeetingToken);
+router.get('/log/:msg', (req, res) => {
+    const { msg } = req.params;
+    console.log(msg);
+    res.status(200).json({ msg });
+});
 
 module.exports = router;

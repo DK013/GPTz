@@ -40,10 +40,10 @@ $('#joinForm').on('submit', async function(e) {
     });
     const jsonData = await response.json();
     if(response.ok) {
-        $('#app').removeClass('hidden');
-        $('#joinForm').addClass('hidden');
-        $('#token').val(jsonData.signature);
-        getJoinToken(id);
+        // $('#app').removeClass('hidden');
+        // $('#joinForm').addClass('hidden');
+        // $('#token').val(jsonData.signature);
+        window.location.href = '/install';
     }
     else {
         $('#joinForm').append('<div class="alert alert-danger mt-3" role="alert">Something went wrong. Check Console for details.</div>')

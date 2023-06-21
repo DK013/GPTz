@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 const KJUR = require('jsrsasign');
+const ZoomAppModel = require('../models/zoomAppModel');
+const mongoose = require('mongoose');
 
 const API_URL = 'https://api.zoom.us/v2';
 
@@ -12,7 +14,7 @@ const getMeetingJWT = (req, res) => {
 
     const oPayload = {
         sdkKey: process.env.ZOOM_MEETING_SDK_KEY,
-        mn: req.body.meetingNumber,
+        mn: req.body.meetingId,
         role: req.body.role,
         iat: iat,
         exp: exp,
@@ -24,44 +26,29 @@ const getMeetingJWT = (req, res) => {
     const sPayload = JSON.stringify(oPayload)
     const signature = KJUR.jws.JWS.sign('HS256', sHeader, sPayload, process.env.ZOOM_MEETING_SDK_SECRET)
 
+    req.session.meetingId = req.body.meetingId;
+    req.session.JWT = signature;
+
     res.json({
         signature: signature
     })
 }
 
-//Get Metting Token
-const getMeetingToken = async (req, res) => {
-    const response = await fetch(`${API_URL}/meetings/${req.body.id}/jointoken/local_recording`, {
-        method: 'GET',
-        headers: { 
-            'Authorization': `Bearer ${req.body.token}`,
-            'Accept': 'application/json'
-        }
-    });
-    const content = await response.json();
-    res.status(200).json(content);
-};
+//get Context from DB using meeting number
+const getContext = async (req, res) => {
+    console.log('get context');
+    const { id } = req.params;
+    console.log(id);
 
-//Get Metting 
-const getAccessToken = async (req, res) => {
-    const { code } = req.params;
-    var authHeader = Buffer.from(`${process.env.ZOOM_CLIENT_ID}:${process.env.ZOOM_CLIENT_SECRET}`).toString('base64');
-    var data = `code=${encodeURIComponent(code)}&grant_type=${encodeURIComponent('authorization_code')}&redirect_uri=${encodeURIComponent(process.env.ZOOM_REDIRECT_URL)}`;
-    const response = await fetch(`https://zoom.us/oauth/token`, {
-        method: 'POST',
-        headers: { 
-            'Authorization': `Basic ${authHeader}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-    });
-    const content = await response.json();
-    res.status(200).json(content);
+    const context = await ZoomAppModel.find({ meetingId: id});
+
+    if(!context)
+        return res.status(404).json({error: "context not found"});
+    
+    res.status(200).json(context[0]);
 }
 
-
 module.exports = {
-    getAccessToken,
     getMeetingJWT,
-    getMeetingToken
+    getContext
 }
