@@ -14,7 +14,7 @@ const logFunc = require('./helpers/requestHelper');
 const mongoose = require('mongoose');
 
 const { appName, port, zoomApp } = require('./config');
-const indexRoutes = require('./routes/index');
+const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 
@@ -42,7 +42,7 @@ app.use(logger('dev', { stream: { write: (msg) => dbg(msg) } }));
 axios.interceptors.request.use(logFunc);
 axios.interceptors.response.use(logFunc);
 
-app.use('/', indexRoutes);
+app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/v1', apiRoutes);
 

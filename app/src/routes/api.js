@@ -6,7 +6,7 @@ const session = require('../session.js');
 const { 
     getMeetingJWT,
     getContext,
-} = require('../controller');
+} = require('../controller/api');
 
 router.post('/jwt', session, getMeetingJWT);
 

@@ -19,11 +19,13 @@ async function executeOnFirstLoad() {
         if(response.ok) {
             if(!data.error) {
                 $('#app').removeClass('hidden');
+                $('#auth').addClass('hidden');
                 document.getElementById('meeting_number').value = data.meetingId;
                 document.getElementById('jwt').value = data.meetingJWT;
                 document.getElementById('token').value = data.accessToken;
             } else {
                 $('#app').addClass('hidden');
+                $('#auth').removeClass('hidden');
             }
         }
     }).catch((error) => {

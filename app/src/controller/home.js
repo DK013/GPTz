@@ -1,15 +1,9 @@
-const express = require('express');
-const url = require('node:url');
-const router = express.Router();
-const { handleError, sanitize } = require('../helpers/routing.js');
-const { contextHeader, getAppContext } = require('../helpers/cipher.js');
-const { getInstallURL } = require('../helpers/zoom-api.js');
-const { zoomApp } = require('../config.js');
-const session = require('../session.js');
-
+const { handleError, sanitize } = require('../helpers/routing');
+const { contextHeader, getAppContext } = require('../helpers/cipher');
+const { getInstallURL } = require('../helpers/zoom-api');
 const { appName } = require('../config');
 
-router.get('/', session, (req, res, next) => {
+const homeController = (req, res, next) => {
     try {
         sanitize(req);
 
@@ -27,13 +21,13 @@ router.get('/', session, (req, res, next) => {
     } catch (e) {
         next(handleError(e));
     }
-})
+}
 
-router.get('/install', session, async (req, res) => {
+const installController = async (req, res) => {
     const { url, state, verifier } = getInstallURL();
     req.session.state = state;
     req.session.verifier = verifier;
     res.redirect(url.href);
-});
+}
 
-module.exports = router;
+module.exports = { homeController, installController };

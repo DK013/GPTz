@@ -1,9 +1,5 @@
-const fetch = require('node-fetch');
 const KJUR = require('jsrsasign');
 const ZoomAppModel = require('../models/zoomAppModel');
-const mongoose = require('mongoose');
-
-const API_URL = 'https://api.zoom.us/v2';
 
 //Get JWT
 const getMeetingJWT = (req, res) => {
