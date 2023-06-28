@@ -1,4 +1,5 @@
 const KJUR = require('jsrsasign');
+const { redirectUri } = require('../config');
 const ZoomAppModel = require('../models/zoomAppModel');
 
 //Get JWT
@@ -32,19 +33,22 @@ const getMeetingJWT = (req, res) => {
 
 //get Context from DB using meeting number
 const getContext = async (req, res) => {
-    console.log('get context');
     const { id } = req.params;
-    console.log(id);
 
     const context = await ZoomAppModel.find({ meetingId: id});
 
-    if(!context)
+    if(!context || context.length === 0)
         return res.status(404).json({error: "context not found"});
     
     res.status(200).json(context[0]);
 }
 
+const getAuthUrl = async (req, res) => {
+    res.status(200).json({url: redirectUri});
+}
+
 module.exports = {
     getMeetingJWT,
-    getContext
+    getContext,
+    getAuthUrl
 }

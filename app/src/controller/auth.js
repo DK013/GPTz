@@ -21,7 +21,7 @@ const authController = async (req, res, next) => {
         
         // save authtoken in db
         try {
-            await ZoomAppModel.create({meetingId: req.session.meetingId, meetingJWT: req.session.JWT, clientId: zoomApp.clientId, accessToken: req.session.accessToken});
+            await ZoomAppModel.create({meetingId: req.session.meetingId, meetingJWT: req.session.JWT, clientId: zoomApp.clientId, accessToken: accessToken});
         } catch (error) {
             next(handleError(error));
         }

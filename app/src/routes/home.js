@@ -7,7 +7,7 @@ const {
     installController
 } = require('../controller/home');
 
-router.get('/', session, homeController)
+router.get('/', session, homeController);
 
 router.get('/install', session, installController);
 

@@ -42,6 +42,11 @@ app.use(logger('dev', { stream: { write: (msg) => dbg(msg) } }));
 axios.interceptors.request.use(logFunc);
 axios.interceptors.response.use(logFunc);
 
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
+
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/v1', apiRoutes);

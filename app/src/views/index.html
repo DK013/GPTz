@@ -16,11 +16,8 @@
                 <%- include('app.html') -%>
             <% } else { %>
                 <%- include('form.html') -%>
-                <div class="alert alert-info mt-3" role="alert">
-                    <i class="bi bi-info-circle"></i> You're viewing the app from <%= context %>
-                </div>
             <% } %>
-            <pre id="url"></pre>
+            <pre id="log"></pre>
         </main>
         <%- include('footer.html') -%>
 

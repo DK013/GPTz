@@ -13,11 +13,11 @@ const headers = {
     crossOriginEmbedderPolicy: false,
     contentSecurityPolicy: {
         directives: {
-            'default-src': 'self',
+            'default-src': ["'self'", `https://${redirectHost}`],
             styleSrc: ["'self'", "*"],
-            scriptSrc: ["'self'", 'https://appssdk.zoom.us/sdk.min.js'],
+            scriptSrc: ["'self'", `https://${redirectHost}`, 'https://appssdk.zoom.us', 'https://cdn.jsdelivr.net'],
             imgSrc: ["'self'", `https://${redirectHost}`],
-            'connect-src': ["'self'", `https://${redirectHost}`],
+            'connect-src': ["'self'", `https://${redirectHost}`, 'https://api.zoom.us'],
             'base-uri': 'self',
             'form-action': 'self',
         },

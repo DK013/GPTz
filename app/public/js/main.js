@@ -1,9 +1,16 @@
-async function getAccessToken() {
-    const urlParams = new URLSearchParams(window.location.search);
-    var response = await fetch('/api/v1/auth/'+urlParams.get('code'));
-    const data = await response.json();
-    return data;
+window.onerror = function(e){
+    document.getElementById('log').innerHTML = e.toString();
 }
+$(document).ready(async function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get('id')) {
+        $('#zoomlink').val(urlParams.get('id'));
+    }
+    if(urlParams.get('role')) {
+        var role = urlParams.get('role') == 'host' ? 1 : 0;
+        $('#zoomrole').val(role);
+    }
+});
 
 $('#joinForm').on('submit', async function(e) {
     e.preventDefault();
@@ -50,6 +57,13 @@ $('#joinForm').on('submit', async function(e) {
         console.log(json.error);
     }
 })
+
+async function getAccessToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    var response = await fetch('/api/v1/auth/'+urlParams.get('code'));
+    const data = await response.json();
+    return data;
+}
 
 const getJoinToken = async (id) => {
     var accessToken = await getAccessToken();
