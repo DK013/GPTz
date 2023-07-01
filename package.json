@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
-    "envsub": "^4.1.0"
+    "envsub": "^4.1.0",
+    "nodemon": "^2.0.22"
   }
 }

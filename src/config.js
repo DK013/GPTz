@@ -1,5 +1,7 @@
+var env = process.env.NODE_ENV || 'development';
 const url = require('node:url');
-require('dotenv').config();
+if(env === 'development')
+    require('dotenv').config();
 
 const config = process.env;
 const deps = [
