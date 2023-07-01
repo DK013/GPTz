@@ -1,0 +1,105 @@
+:root {
+    --theme-color: #296eee;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+}
+* {
+    transition: all 0.5s ease-in-out;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+.flex.f-row {
+    flex-direction: row;
+}
+.flex.center {
+    align-items: center;
+    justify-content: center;
+}
+.flex.justify-between {
+    align-items: center;
+    justify-content: space-between;
+}
+.hidden {
+    display: none;
+}
+main {
+    position: relative;
+    height: calc(100% - 100px);
+}
+select {
+    text-align-last: center;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 45px;
+    background: #f3f3f3;
+}
+
+.navbar-brand img {
+    max-height: 45px;
+    width: auto;
+}
+.footer-text {
+    line-height: 25px;
+}
+.footer-text i {
+    vertical-align: middle;
+}
+#log {
+    position: absolute;
+    bottom: 20px;
+    height: 100px;
+}
+.loader > h1 {
+    font-family: Oak,sans-serif;
+    color: rgba(0,0,0,0.7);
+}
+.loader > div.flex {
+    height: 50px;
+}
+.loader .b2 {
+    animation-delay:100ms;
+}
+.loader .b3 {
+    animation-delay:200ms
+}
+.loader .b1, 
+.loader .b2,
+.loader .b3 {
+    width:10px;
+    height:30px;
+    background-color:rgba(256,256,256,0.8);
+    transform:rotate(0);
+    animation-name:spinify;
+    animation-duration:1600ms;
+    animation-iteration-count:infinite;
+}
+@keyframes spinify {
+    0% {
+        transform: translate(0px,0px);
+        
+    }
+    33% {
+        transform: translate(0px,24px);
+        border-radius:100%;
+        width:10px;
+        height:10px;
+
+    }
+    66% {
+        transform:translate(0px,-16px);
+    }
+
+    88% {
+        transform:translate(0px,4px);
+        
+    }
+    100% {
+        transform:translate(0px,0px);
+    }
+}
