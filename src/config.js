@@ -7,6 +7,7 @@ const deps = [
     'ZOOM_MEETING_SDK_SECRET',
     'ZOOM_REDIRECT_URL',
     'SESSION_SECRET',
+    'OPENAI_KEY'
 ];
 
 // Check that we have all our config dependencies
@@ -31,13 +32,11 @@ try {
 
 const zoomApp = {
     host: config.ZOOM_HOST || 'https://zoom.us',
-    clientId: config.ZOOM_CLIENT_ID,
-    clientSecret: config.ZOOM_CLIENT_SECRET,
     meetingKey: config.ZOOM_MEETING_SDK_KEY,
     meetingSecret: config.ZOOM_MEETING_SDK_SECRET,
     redirectUrl: config.ZOOM_REDIRECT_URL,
     sessionSecret: config.SESSION_SECRET,
-    dbUrl: config.MONGO_URI
+    openaiKey: config.OPENAI_KEY
 };
 
 // Zoom App Info

@@ -23,7 +23,8 @@ $(document).ready(async function() {
                 passWord: context.password,
                 userName: context.username,
                 success: (success) => {
-                  console.log(success)
+                  //speech recognition
+                  listener.listen();
                 },
                 error: (error) => {
                   console.log(error)

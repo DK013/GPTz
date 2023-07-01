@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# GPTz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+a Zoom bot that answers questions using ChatGPT
 
 ## Available Scripts
 

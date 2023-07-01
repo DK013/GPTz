@@ -1,5 +1,12 @@
 const KJUR = require('jsrsasign');
+const { Configuration, OpenAIApi } = require("openai");
 const { zoomApp, redirectUri, appName } = require('../config');
+
+const configuration = new Configuration({
+    apiKey: zoomApp.openaiKey,
+});
+
+const openai = new OpenAIApi(configuration);
 
 //Get JWT
 const getMeetingJWT = (req, res) => {
@@ -51,8 +58,17 @@ const getAuthUrl = async (req, res) => {
     res.status(200).json({url: redirectUri});
 }
 
+const runGPT = async (req, res) => {
+    const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{"role": "system", "content": "You are a helpful assistant names GPTz."}, {role: "user", content: req.body.prompt}],
+    });
+    res.status(200).json(completion.data.choices[0].message);
+}
+
 module.exports = {
     getMeetingJWT,
     getContext,
-    getAuthUrl
+    getAuthUrl,
+    runGPT
 }

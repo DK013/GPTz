@@ -6,7 +6,8 @@ const session = require('../session.js');
 const { 
     getMeetingJWT,
     getContext,
-    getAuthUrl
+    getAuthUrl,
+    runGPT
 } = require('../controller/api');
 
 router.post('/jwt', session, getMeetingJWT);
@@ -14,6 +15,8 @@ router.post('/jwt', session, getMeetingJWT);
 router.get('/getContext', session, getContext);
 
 router.get('/getAuthUrl', getAuthUrl);
+
+router.post('/gpt', runGPT);
 
 router.get('/log/:msg', (req, res) => {
     const { msg } = req.params;
