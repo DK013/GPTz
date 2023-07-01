@@ -4,8 +4,8 @@ const concurrently = require('concurrently');
 let command = `nodemon src/index.js`;
 
 if (process.platform === 'win32')
-    command = `set "DEBUG=zoomapps*" & ${command}`;
-else command = `DEBUG="zoomapps*" ${command}`;
+    command = `set "DEBUG=gptz*" & ${command}`;
+else command = `DEBUG="gptz*" ${command}`;
 
 const { result } = concurrently([
     {
