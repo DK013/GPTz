@@ -6,7 +6,7 @@ a Zoom bot that answers questions using ChatGPT
 
 Run `npm install` to install node dependencies which also runs `postinstall` script to auto-generate `.env` file with default values. Enter other secrets manually:
 
-* PORT [auto generated](server port to run the express app. default: `8080`)
+* PORT [auto generated](server port to run the express app. default: `4000`)
 * APP_NAME [auto generated](name of the bot as to show on Zoom client. default: `GPTz`)
 * ZOOM_MEETING_SDK_KEY (`Client ID` from Zoom Meeting SDK App. [See Details](https://developers.zoom.us/docs/meeting-sdk/create/https:/))
 * ZOOM_MEETING_SDK_SECRET (`Client Secret` from Zoom Meeting SDK App. [See Details](https://developers.zoom.us/docs/meeting-sdk/create/https:/))

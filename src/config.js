@@ -46,7 +46,7 @@ const appName = config.APP_NAME || 'zoom-app';
 const redirectUri = zoomApp.redirectUrl;
 
 // HTTP
-const port = config.PORT || '8080';
+const port = config.PORT || '4000';
 
 // require secrets are explicitly imported
 module.exports = {

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "node scripts/dev.js",
-    "serve": "ngrok http 8080",
+    "serve": "ngrok http 4000",
     "prepare": "node scripts/gen-secrets.cjs",
     "postinstall": "npm run prepare",
     "test": "echo \"Error: no test specified\" && exit 1"
