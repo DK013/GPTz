@@ -58,6 +58,8 @@ const getAuthUrl = async (req, res) => {
     res.status(200).json({url: redirectUri});
 }
 
+
+//run gpt inference using openai api
 const runGPT = async (req, res) => {
     const completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",

@@ -41,11 +41,13 @@ app.use(logger('dev', { stream: { write: (msg) => dbg(msg) } }));
 axios.interceptors.request.use(logFunc);
 axios.interceptors.response.use(logFunc);
 
+//log request
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
 
+//routes
 app.use('/', homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/v1', apiRoutes);
@@ -68,6 +70,7 @@ app.use((err, req, res, next) => {
 //handle 404
 app.get('*', (req, res) => res.redirect('/'));
 
+//start app
 app.listen(port, () => {
     console.log(`app listenning on port ${port}`);
 });

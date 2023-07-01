@@ -3,6 +3,7 @@ const { contextHeader, getAppContext } = require('../helpers/cipher');
 const { getInstallURL } = require('../helpers/zoom-api');
 const { appName } = require('../config');
 
+//Homepage
 const homeController = (req, res, next) => {
     try {
         sanitize(req);
@@ -23,6 +24,7 @@ const homeController = (req, res, next) => {
     }
 }
 
+//OAuth flow
 const installController = async (req, res) => {
     const { url, state, verifier } = getInstallURL();
     req.session.state = state;
@@ -30,6 +32,7 @@ const installController = async (req, res) => {
     res.redirect(url.href);
 }
 
+//Meeting Page
 const meetingController = async (req, res) => {
     res.locals.isMeeting = true;
         
@@ -38,6 +41,7 @@ const meetingController = async (req, res) => {
     });
 }
 
+//End Meeting Page
 const endController = async (req, res) => {
     req.session = {};
     res.locals.isEnd = true;

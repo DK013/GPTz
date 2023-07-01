@@ -1,6 +1,3 @@
-window.onerror = function(e){
-    document.getElementById('log').innerHTML = e.toString();
-}
 $(document).ready(async function() {
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams.get('id')) {
@@ -45,8 +42,9 @@ $('#joinForm').on('submit', async function(e) {
         },
         body: JSON.stringify({meetingId: id, password: pass})
     });
-    const jsonData = await response.json();
+    
     if(response.ok) {
+        //if meeting number provided instead of joinUrl the server will try to retrive meeting context using Oauth flow
         if(mode === 'number')
             window.location.href = '/install';
         else
@@ -57,34 +55,3 @@ $('#joinForm').on('submit', async function(e) {
         console.log(json.error);
     }
 })
-
-async function getAccessToken() {
-    const urlParams = new URLSearchParams(window.location.search);
-    var response = await fetch('/api/v1/auth/'+urlParams.get('code'));
-    const data = await response.json();
-    return data;
-}
-
-const getJoinToken = async (id) => {
-    var accessToken = await getAccessToken();
-    
-    const response = await fetch('/api/v1/token', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({id: id, token: accessToken.access_token})
-    });
-    
-    const jsonData = await response.json();
-
-    if(response.ok) {
-        $('#jointoken').val(jsonData.token);
-    }
-    else {
-        $('#joinForm').append('<div class="alert alert-danger mt-3" role="alert">Something went wrong. Check Console for details.</div>')
-        console.log(json.error);
-    }
-}
-
-var clipboard = new ClipboardJS('.copyBtn');

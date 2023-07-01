@@ -4,6 +4,7 @@ const { getDeeplink, getToken } = require('../helpers/zoom-api');
 
 const { zoomApp } = require('../config');
 
+//handles OAuth callback
 const authController = async (req, res, next) => {
     req.session.state = null;
 
